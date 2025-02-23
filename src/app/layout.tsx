@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
+import { Header } from '@/components/ui/header'
+import { Footer } from '@/components/footer'
 import { Toaster } from '@/components/ui/toaster'
 
 const fontSans = FontSans({
@@ -34,7 +36,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
