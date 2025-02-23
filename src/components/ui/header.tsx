@@ -4,7 +4,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
-import { ShoppingCart, User } from 'lucide-react'
+import { CartSheet } from '@/components/cart-sheet'
+import { User } from 'lucide-react'
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 
 const navigation = [
   { name: 'Accueil', href: '/' },
@@ -28,7 +36,9 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center text-lg font-medium transition-colors hover:text-foreground/80 ${pathname === item.href ? 'text-foreground' : 'text-foreground/60'}`}
+                className={`flex items-center text-lg font-medium transition-colors hover:text-foreground/80 ${
+                  pathname === item.href ? 'text-foreground' : 'text-foreground/60'
+                }`}
               >
                 {item.name}
               </Link>
@@ -37,12 +47,25 @@ export function Header() {
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Button variant="ghost" size="icon">
-            <User className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <User className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Mon compte</SheetTitle>
+              </SheetHeader>
+              <div className="mt-4 space-y-4">
+                <Button className="w-full">Se connecter</Button>
+                <Button variant="outline" className="w-full">
+                  S'inscrire
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+          <CartSheet />
         </div>
       </div>
     </header>
